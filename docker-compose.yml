@@ -4,6 +4,7 @@ services:
   bot:
     image: 'rimini/bot'
     build: .
+    restart: unless-stopped
     environment:
       NODE_ENV: ${NODE_ENV}
       BOT_TOKEN: ${BOT_TOKEN}

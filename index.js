@@ -10,9 +10,10 @@ bot.context.pdf = {
   }
 }
 
-bot.on('text', async (ctx) => {
+async function sendTimetable (ctx) {
   try {
-    const numero = ctx.message.text
+    const numero = ctx.message.text.split(' ')[1]
+    ctx.reply(`Un attimo che recupero la linea ${numero}...`)
     const file = await ctx.pdf.getLine(numero)
     await ctx.telegram.sendDocument(ctx.from.id, {
       source: file,
@@ -22,6 +23,11 @@ bot.on('text', async (ctx) => {
     console.log(error)
     return ctx.reply('Impossibile recuperare il documento, hai dato il numero della linea correttamente ?')
   }
-})
+}
+
+bot.command('start', ctx => ctx.reply('Ciao, scrivi /bus {numero_linea} per avere gli orari di quella linea'))
+
+bot.command('bus', sendTimetable)
+bot.command('linea', sendTimetable)
 
 bot.launch()
