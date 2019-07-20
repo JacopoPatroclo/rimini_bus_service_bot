@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  bot:
+    image: 'rimini/bot'
+    build: .
+    environment:
+      NODE_ENV: ${NODE_ENV}
+      BOT_TOKEN: ${BOT_TOKEN}
