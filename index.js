@@ -15,7 +15,7 @@ async function sendTimetable (ctx) {
     const numero = ctx.message.text.split(' ')[1]
     ctx.reply(`Un attimo che recupero la linea ${numero}...`)
     const file = await ctx.pdf.getLine(numero)
-    await ctx.telegram.sendDocument(ctx.from.id, {
+    await ctx.telegram.sendDocument(ctx.chat.id, {
       source: file,
       filename: `${numero}.pdf`
     })
